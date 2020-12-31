@@ -1,0 +1,2 @@
+# divinator
+divinates for you
