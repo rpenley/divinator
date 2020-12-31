@@ -1,14 +1,24 @@
 #!/bin/python
+###########################################
+# The all powerful and all flawed Divinator
+# Will prognosticate for anyone or anything
+# Free to use for your pleasure...  or pain 
+###########################################
+
+#Library imports
+import datetime, time
+from nltk.corpus import wordnet as wn
+from random import sample
+
 #input name (username not actual name)
 #<name>
 #
 username = input("Enter your name: ")
 
-#input birthday (convert to unix time)
-#xx/yy/zz
-#
+# Get birthday and convert to unix time
+birthstring = input("Enter your birthday in mm/dd/yy format: ")
+birthstamp = time.mktime(datetime.datetime.strptime(birthstring, "%m/%d/%y").timetuple())
 
-birthday = input("Enter your birthday in dd/mm/yy format: ")
 #randomly ask for extra input
 #
 
