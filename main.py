@@ -6,20 +6,50 @@
 ###########################################
 
 # Library imports and Downloads
-import datetime, random, textwrap, markovify, nltk
-from nltk.corpus import wordnet as wn
+#!/usr/bin/python
+import random
+import markovify
+import re
+import spacy
 
-### Verify reference texts are downloaded
-try:
-	nltk.data.find('corpus/wordnet')
-	nltk.data.find('corpus/gutenberg')
-	nltk.data.find('corpus/genesis')
-	nltk.data.find('tokenizers/punkt')
-except LookupError:
-	nltk.download('wordnet', quiet=True)
-	nltk.download('gutenberg', quiet=True)
-	nltk.download('punkt', quiet=True)
-	nltk.download('genesis', quiet=True)
+# Load the spaCy English model
+nlp = spacy.load("en")
+
+# Replace the word_split and word_join methods in markovify with spaCy models, as shown in the markovify demo
+class POSifiedText(markovify.Text):
+    def word_split(self, sentence):
+        return ["::".join((word.orth_, word.pos_)) for word in nlp(sentence)]
+
+    def word_join(self, words):
+        sentence = " ".join(word.split("::")[0] for word in words)
+        return sentence
+
+# Load bible data (King James Version)
+kjv = open("data/kjv.txt").read()
+kjvmodel = markovify.Text(kjv)
+
+# Load the kjv text
+kjv = open("data/kjv.txt").read()
+kjvmodel = markovify.Text(kjv)
+
+# Load the kjv text
+kjv = open("data/kjv.txt").read()
+kjvmodel = markovify.Text(kjv)
+
+# Load the kjv text
+kjv = open("data/kjv.txt").read()
+kjvmodel = markovify.Text(kjv)
+
+# Load the kjv text
+kjv = open("data/kjv.txt").read()
+kjvmodel = markovify.Text(kjv)
+
+# Feel free to play with the parameters of the combined model, but 1:1.7 seems to work ok empirically
+#kjvicomodel = markovify.combine([ kjvmodel, icomodel ], [ 1, 1.7 ])
+
+#for i in range(96):
+print(kjvmodel.make_short_sentence(280))
+
 ### Input name (username not actual name)
 #
 #username = input("Enter your name: ")
@@ -30,50 +60,12 @@ except LookupError:
 
 ### Randomly ask for extra input
 #
-#for synset in list(wn.all_synsets('n')):
-#print(sample(wn.all_synsets('n'),1))
-#nouns = wn.all_synsets('n')
-#print(type(nouns))
 
-#bible = nltk.Text(nltk.corpus.gutenberg.sents(u'bible-kjv.txt'))
-#bibleText = nltk.Text(bible)
-#bibleText.generate()
+### Nostradamus 
+#
 
-#cfd = nltk.ConditionalFreqDist(nltk.bigrams(bible))
-def generate_model(cfdist, word, num=15):
-    for i in range(num):
-        print(word, end=' ')
-        word = cfdist[word].max()
-
-text = nltk.corpus.genesis.words('english-kjv.txt')
-bigrams = nltk.bigrams(text)
-cfd = nltk.ConditionalFreqDist(bigrams) 
-#generate_model(cfd, 'noah')
-
-def generate_sents(corpus_file, n=1):
-    words = nltk.corpus.gutenberg.words(corpus_file)
-    fd = nltk.FreqDist(words)
-    sents = nltk.corpus.gutenberg.sents(corpus_file)
-    ss= sorted(sents, reverse=True, key=(lambda x:sum(fd[w] for w in x)) )
-    for i in range(n):
-        for line in ' '.join(ss[i]):
-            print(line, end='')
-
-generate_sents('austen-emma.txt', 69)
-# Pick a random word from the corpus to start with
-#is_noun = lambda pos: pos[:2] == 'NN'
-#tokenized = nltk.word_tokenize(bible)
-#nouns = [word for (word, pos) in nltk.pos_tag(tokenized) if is_noun(pos)] 
-#print(random.choice(bible))
-#word = random.choice(bible)
-#print ("and behold the lord said " + word)
-# generate 15 more words
-#for i in range(15):
-#    print(word, end=' ')
-#    if word in cfd:
-#        word = random.choice(list(cfd[word].keys()))
-#    else:
-#        break
+### Star Data
+#
 
 ### Randomly ask yes or no question?
 #
@@ -104,3 +96,4 @@ generate_sents('austen-emma.txt', 69)
 
 ### Present a picture
 #
+
