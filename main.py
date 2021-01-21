@@ -11,6 +11,8 @@ import random
 import markovify
 import re
 import spacy
+import time
+import datetime
 
 # Load the spaCy English model
 nlp = spacy.load("en")
@@ -28,44 +30,52 @@ class POSifiedText(markovify.Text):
 kjv = open("data/kjv.txt").read()
 kjvmodel = markovify.Text(kjv)
 
-# Load the kjv text
-kjv = open("data/kjv.txt").read()
-kjvmodel = markovify.Text(kjv)
+# Load Nostradamus Prophecies
+#nostro = open("data/kjv.txt").read()
+#nostromodel = markovify.Text(kjv)
 
-# Load the kjv text
-kjv = open("data/kjv.txt").read()
-kjvmodel = markovify.Text(kjv)
+# Load Star and Constallation Data
+#stars = open("data/kjv.txt").read()
+#starmodel = markovify.Text(kjv)
 
-# Load the kjv text
-kjv = open("data/kjv.txt").read()
-kjvmodel = markovify.Text(kjv)
+# Load Horriscope Data
+#madeupjunk = open("data/kjv.txt").read()
+#madeupjunkmodel = markovify.Text(kjv)
 
-# Load the kjv text
-kjv = open("data/kjv.txt").read()
-kjvmodel = markovify.Text(kjv)
+# Load Questions Data
+questions = open("data/questions.txt").read()
+questionsmodel = markovify.Text(questions)
 
 # Feel free to play with the parameters of the combined model, but 1:1.7 seems to work ok empirically
 #kjvicomodel = markovify.combine([ kjvmodel, icomodel ], [ 1, 1.7 ])
 
-#for i in range(96):
-print(kjvmodel.make_short_sentence(280))
-
 ### Input name (username not actual name)
 #
-#username = input("Enter your name: ")
+username = input("Enter your name: ")
+usernum = 0
+for x in username:
+	usernum += ord(x)
 
 ### Get birthday and convert to unix time
-#birthstring = input("Enter your birthday in mm/dd/yy format: ")
-#birthstamp = time.mktime(datetime.datetime.strptime(birthstring, "%m/%d/%y").timetuple())
+birthstring = input("Enter your birthday in mm/dd/yy format: ")
+birthstamp = time.mktime(datetime.datetime.strptime(birthstring, "%m/%d/%y").timetuple())
+divid = int(birthstamp) + usernum
+print("Your unique Divination ID is " + str(divid))
+random.seed(divid)
 
 ### Randomly ask for extra input
 #
+answer = input(questionsmodel.make_short_sentence(280))
 
 ### Nostradamus 
 #
 
 ### Star Data
 #
+
+### biblical quote
+#
+print(kjvmodel.make_short_sentence(280))
 
 ### Randomly ask yes or no question?
 #
