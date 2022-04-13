@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/bin/python3
 # Generate random sentences from a corpus using Markov chains."""
 import nltk
 

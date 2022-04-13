@@ -1,0 +1,5 @@
+pandas
+nltk
+urllib3
+markovify
+bs4

@@ -1,4 +1,4 @@
-#!/bin/python
+#!/bin/python3
 ###########################################
 # The all powerful and all flawed Divinator
 # Will prognosticate for anyone or anything
